@@ -1,0 +1,45 @@
+{
+  "name": "saas-support-handbook",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "The SaaS Support Handbook — training and desk-side reference for SaaS support teams",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:dev:private": "cross-env INCLUDE_PRODUCT_RUNBOOKS=true vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:build:private": "cross-env INCLUDE_PRODUCT_RUNBOOKS=true vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "admin:api": "cross-env ADMIN_LOCAL=true node scripts/admin-api.mjs",
+    "admin:dev": "vite --config admin/vite.config.ts",
+    "admin:build": "vite build --config admin/vite.config.ts",
+    "build": "npm run admin:build && npm run docs:build",
+    "snapshot:defaults": "node scripts/snapshot-defaults.mjs",
+    "test": "playwright test",
+    "lint:md": "markdownlint-cli2",
+    "lint:links": "node scripts/check-links.mjs",
+    "qa": "npm run lint:md && npm run lint:links && npm run build && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.20.3",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "cross-env": "^10.1.0",
+    "markdownlint-cli2": "^0.23.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitepress": "^2.0.0-alpha.20",
+    "vue": "^3.5.43",
+    "vue-router": "^5.4.0"
+  },
+  "dependencies": {
+    "cookie": "^2.0.1",
+    "cookie-signature": "^1.2.2",
+    "easymde": "^2.21.0",
+    "shepherd.js": "^15.3.0"
+  }
+}

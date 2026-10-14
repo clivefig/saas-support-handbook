@@ -1,0 +1,33 @@
+name: QA
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  handbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint Markdown
+        run: npm run lint:md
+
+      - name: Check links
+        run: npm run lint:links
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Build admin + public site and run end-to-end tests
+        run: npm test

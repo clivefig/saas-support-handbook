@@ -1,0 +1,15 @@
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/public/admin/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+.env.local

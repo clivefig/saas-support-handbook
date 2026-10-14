@@ -1,0 +1,92 @@
+{
+  "nav": [
+    { "text": "Train", "link": "/training/" },
+    { "text": "Look up", "link": "/errors/http" },
+    { "text": "Tools", "link": "/tools/" },
+    { "text": "Privacy", "link": "/legal/privacy" }
+  ],
+  "sidebar": [
+    {
+      "text": "Start",
+      "collapsed": false,
+      "items": [
+        { "text": "How to use this handbook", "link": "/guide/how-to-use" },
+        { "text": "Evidence standard", "link": "/guide/evidence" },
+        { "text": "Severity and escalation", "link": "/guide/severity" }
+      ]
+    },
+    {
+      "text": "Toolbelt",
+      "collapsed": false,
+      "items": [
+        { "text": "Overview", "link": "/tools/" },
+        { "text": "Ticketing", "link": "/tools/ticketing" },
+        { "text": "API clients", "link": "/tools/api-clients" },
+        { "text": "Database clients", "link": "/tools/database-clients" },
+        { "text": "Observability", "link": "/tools/observability" },
+        { "text": "Privacy and customer data", "link": "/tools/privacy" }
+      ]
+    },
+    {
+      "text": "Errors",
+      "collapsed": false,
+      "items": [
+        { "text": "HTTP status codes", "link": "/errors/http" },
+        { "text": "Client errors (4xx)", "link": "/errors/http-4xx" },
+        { "text": "Server errors (5xx)", "link": "/errors/http-5xx" },
+        { "text": "API error shapes", "link": "/errors/api" },
+        { "text": "GraphQL errors", "link": "/errors/graphql" },
+        { "text": "OAuth errors", "link": "/errors/oauth" }
+      ]
+    },
+    {
+      "text": "Browser",
+      "collapsed": false,
+      "items": [
+        { "text": "Console", "link": "/browser/console" },
+        { "text": "Network", "link": "/browser/network" },
+        { "text": "HAR files", "link": "/browser/har" }
+      ]
+    },
+    {
+      "text": "Data",
+      "collapsed": false,
+      "items": [
+        { "text": "SQL for support", "link": "/data/sql" },
+        { "text": "MongoDB for support", "link": "/data/mongodb" }
+      ]
+    },
+    {
+      "text": "Training",
+      "collapsed": false,
+      "items": [
+        { "text": "30-day path", "link": "/training/" },
+        { "text": "Days 1–7", "link": "/training/days-1-7" },
+        { "text": "Days 8–14", "link": "/training/days-8-14" },
+        { "text": "Days 15–30", "link": "/training/days-15-30" },
+        { "text": "Scenario labs", "link": "/training/scenarios" }
+      ]
+    },
+    {
+      "text": "Legal",
+      "collapsed": true,
+      "items": [
+        { "text": "Privacy and disclaimer", "link": "/legal/privacy" }
+      ]
+    }
+  ],
+  "productSidebar": [
+    {
+      "text": "Product runbooks",
+      "collapsed": false,
+      "items": [
+        { "text": "How to fill these in", "link": "/product/" },
+        { "text": "Architecture", "link": "/product/architecture" },
+        { "text": "Request IDs", "link": "/product/request-ids" },
+        { "text": "Data queries", "link": "/product/data-queries" },
+        { "text": "Known issues", "link": "/product/known-issues" },
+        { "text": "Escalation matrix", "link": "/product/escalation" }
+      ]
+    }
+  ]
+}

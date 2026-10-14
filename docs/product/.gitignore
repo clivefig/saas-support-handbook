@@ -1,0 +1,10 @@
+*
+!.gitignore
+!index.md
+!architecture.md
+!request-ids.md
+!data-queries.md
+!known-issues.md
+!escalation.md
+!local/
+!local/.gitkeep
