@@ -14,7 +14,7 @@ The SaaS Support Handbook is a product-agnostic training and desk-side reference
 
 ## Third-party open source used in the admin UI
 
-- **[Shepherd.js](https://www.shepherdjs.dev/)** — free, open-source product tours used to walk admins through branding, articles, and structure. Shepherd is free to use; this project remains free to use as well. If you use change this to a commercial product then please review **[Shepherd.js](https://www.shepherdjs.dev/)** for their pricing
+- **[Shepherd.js](https://www.shepherdjs.dev/)** — free, open-source product tours used to walk admins through branding, articles, and structure. Shepherd is free to use; this project remains free to use as well. If you use change this to a commercial product then please review **[Shepherd.js](https://www.shepherdjs.dev/)** for their pricing for commercial projects.
 - **[EasyMDE](https://github.com/Ionaru/easy-markdown-editor)** — open-source Markdown editor in the admin article screens.
 - **[VitePress](https://vitepress.dev/)** — static documentation site generator for the public handbook.
 
