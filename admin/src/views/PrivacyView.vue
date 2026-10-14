@@ -6,7 +6,7 @@
     </p>
     <div class="card">
       <div class="row" style="justify-content: flex-end; margin-bottom: 0.75rem">
-        <button class="btn btn-primary" :disabled="saving" @click="save">Save</button>
+        <button class="btn btn-primary" :disabled="saving || !ready" @click="save">Save</button>
       </div>
       <textarea ref="textareaEl" />
     </div>
@@ -21,20 +21,28 @@ import { api } from '../api'
 const toast = inject<(m: string) => void>('toast', () => {})
 const textareaEl = ref<HTMLTextAreaElement | null>(null)
 const saving = ref(false)
+const ready = ref(false)
 let editor: EasyMDE | null = null
 const path = 'docs/legal/privacy.md'
 
 onMounted(async () => {
-  const file = await api.getFile(path)
+  let initial = ''
+  try {
+    const file = await api.getFile(path)
+    initial = file.content
+  } catch (e: any) {
+    toast(e.message || 'Failed to load privacy page')
+  }
   await nextTick()
   if (!textareaEl.value) return
   editor = new EasyMDE({
     element: textareaEl.value,
-    initialValue: file.content,
+    initialValue: initial,
     spellChecker: false,
     status: false,
     minHeight: '480px'
   })
+  ready.value = true
 })
 
 onBeforeUnmount(() => {

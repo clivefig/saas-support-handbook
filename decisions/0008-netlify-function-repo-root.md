@@ -21,3 +21,9 @@ helpers only matter for `ADMIN_LOCAL`.
 
 `/admin/` can load `/api/auth/status` and OAuth on Netlify. Local admin API
 behavior is unchanged when scripts run from the repo root.
+
+## Follow-up
+
+Production admin **reads** (file, nav, article list) must use the GitHub API,
+not the Lambda filesystem — docs are not available on disk in the function.
+See `loadFile` / `loadJson` / `loadArticles` in `lib/api-handler.mjs`.
