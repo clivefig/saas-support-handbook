@@ -74,9 +74,18 @@ npm run snapshot:defaults
 ### 6.1 Create a GitHub OAuth App
 
 1. GitHub → **Settings → Developer settings → OAuth Apps → New OAuth App**
-2. Homepage URL: `https://<your-site>.netlify.app`
-3. Authorization callback URL: `https://<your-site>.netlify.app/api/auth/callback`
-4. Copy **Client ID** and generate a **Client secret**
+   ([github.com/settings/developers](https://github.com/settings/developers))
+2. **Application name:** e.g. `SaaS Support Handbook Admin`
+3. **Homepage URL:** `https://<your-site>.netlify.app` (or your custom domain)
+4. **Authorization callback URL** (GitHub may label this **Redirect URI**):
+   `https://<your-site>.netlify.app/api/auth/callback`
+   — must match `GITHUB_OAUTH_CALLBACK` exactly (no trailing slash after `callback`)
+5. Leave **Allow wildcard matching** unchecked
+6. Leave **Expire user access tokens** **unchecked** (recommended).  
+   Short-lived tokens make Articles / Structure / Privacy calls fail after expiry unless
+   you sign in again. The admin can refresh when a refresh token is present, but the
+   stable setup is non-expiring user tokens.
+7. Register the app → copy **Client ID** → **Generate a new client secret** and copy it once
 
 ### 6.2 Connect the repo to Netlify
 
@@ -100,17 +109,20 @@ Set in Netlify → Site settings → Environment variables (see [`.env.example`]
 | `ADMIN_GITHUB_USERS` | no | Comma-separated logins; if empty, requires **write** on the repo |
 | `ADMIN_LOCAL` | no | Must be unset/false in production |
 
-On the GitHub OAuth App settings, leave **Expire user access tokens** unchecked unless you
-want short-lived tokens (the admin will refresh them when a refresh token is present). After
-signing in, Articles / Structure / Privacy all read and write through the GitHub **Contents**
-API against `GITHUB_REPO` — nothing is read from the Netlify function disk.
+After signing in, Articles / Structure / Privacy / Reset all read and write through the
+GitHub **Contents** API against `GITHUB_REPO` — nothing is read from the Netlify function
+disk. If you previously enabled **Expire user access tokens**, turn it off on the OAuth App,
+then **Log out** of `/admin/` and **Sign in with GitHub** again so the session gets a
+non-expiring token.
 
 ### 6.4 First production login
 
-1. Open `https://<your-site>.netlify.app/admin/`
-2. **Sign in with GitHub**
-3. Only collaborators with push access (or allowlisted users) proceed
-4. Shepherd.js offers a first-run tour of Branding, Articles, and Structure
+1. Confirm the OAuth App still has **Expire user access tokens** unchecked
+2. Open `https://<your-site>.netlify.app/admin/`
+3. **Sign in with GitHub**
+4. Only collaborators with push access (or allowlisted users) proceed
+5. Shepherd.js offers a first-run tour of Branding, Articles, and Structure
+6. Smoke-check: Articles list loads, Structure shows nav/sidebar, Privacy loads and saves
 
 Each save creates a git commit. Netlify rebuilds the public handbook automatically.
 
