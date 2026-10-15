@@ -94,10 +94,16 @@ Set in Netlify → Site settings → Environment variables (see [`.env.example`]
 | `GITHUB_CLIENT_ID` | yes | OAuth App |
 | `GITHUB_CLIENT_SECRET` | yes | OAuth App |
 | `GITHUB_REPO` | yes | `owner/name` of the content repo |
+| `GITHUB_BRANCH` | no | Defaults to `main` |
 | `GITHUB_OAUTH_CALLBACK` | yes | Must match the OAuth App callback |
 | `SESSION_SECRET` | yes | Long random string for session cookies |
 | `ADMIN_GITHUB_USERS` | no | Comma-separated logins; if empty, requires **write** on the repo |
 | `ADMIN_LOCAL` | no | Must be unset/false in production |
+
+On the GitHub OAuth App settings, leave **Expire user access tokens** unchecked unless you
+want short-lived tokens (the admin will refresh them when a refresh token is present). After
+signing in, Articles / Structure / Privacy all read and write through the GitHub **Contents**
+API against `GITHUB_REPO` — nothing is read from the Netlify function disk.
 
 ### 6.4 First production login
 

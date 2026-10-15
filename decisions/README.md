@@ -12,3 +12,4 @@ Architecture Decision Records for this handbook. Numbered, immutable once accept
 | [0006](0006-git-backed-admin.md) | Git-backed admin with GitHub OAuth |
 | [0007](0007-branding-via-code.md) | Branding via code, not admin runtime themes |
 | [0008](0008-netlify-function-repo-root.md) | Netlify function repo root without import.meta.url |
+| [0009](0009-admin-production-github-contents.md) | Production admin via GitHub Contents API |

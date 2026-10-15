@@ -42,8 +42,12 @@ const sectionNames = ref<string[]>([])
 const saving = ref(false)
 
 onMounted(async () => {
-  const nav = await api.getNav()
-  sectionNames.value = (nav.sidebar || []).map((s: any) => s.text)
+  try {
+    const nav = await api.getNav()
+    sectionNames.value = (nav.sidebar || []).map((s: any) => s.text)
+  } catch (e: any) {
+    toast(e.message || 'Failed to load sections')
+  }
 })
 
 async function create() {

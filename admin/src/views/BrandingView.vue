@@ -15,12 +15,16 @@
         <li>Logo / favicon → <code>docs/public/logo.svg</code>, <code>favicon.svg</code></li>
         <li>Colors → <code>docs/.vitepress/theme/custom.css</code></li>
       </ul>
-      <a class="btn btn-primary" href="/setup/BRANDING" target="_blank" rel="noopener"
-        >Open branding guide (repo)</a
+      <a
+        class="btn btn-primary"
+        href="https://github.com/clivefig/saas-support-handbook/blob/main/docs/setup/BRANDING.md"
+        target="_blank"
+        rel="noopener"
+        >Open branding guide on GitHub</a
       >
       <p class="muted" style="margin-top: 1rem; font-size: 0.85rem">
-        The guide is not part of the published handbook site; open it in the GitHub repo or your
-        editor.
+        Branding is edited in the repo (not via admin). Use the guide above or
+        <code>docs/setup/BRANDING.md</code> locally.
       </p>
     </div>
   </div>

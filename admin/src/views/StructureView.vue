@@ -2,6 +2,8 @@
   <div>
     <h1 data-tour="structure-title">Structure</h1>
     <p class="muted">Edit header nav and sidebar sections. Links should match article routes.</p>
+    <p v-if="error" class="muted" style="color: #b91c1c">{{ error }}</p>
+    <p v-if="loading" class="muted">Loading navigation…</p>
 
     <div class="card" v-if="nav" data-tour="structure-editor">
       <h2>Header nav</h2>
@@ -63,9 +65,25 @@ import { api } from '../api'
 const toast = inject<(m: string) => void>('toast', () => {})
 const nav = ref<any>(null)
 const saving = ref(false)
+const loading = ref(true)
+const error = ref('')
 
 onMounted(async () => {
-  nav.value = await api.getNav()
+  loading.value = true
+  error.value = ''
+  try {
+    const data = await api.getNav()
+    nav.value = {
+      nav: data.nav || [],
+      sidebar: data.sidebar || [],
+      productSidebar: data.productSidebar || []
+    }
+  } catch (e: any) {
+    error.value = e.message || 'Failed to load structure'
+    toast(error.value)
+  } finally {
+    loading.value = false
+  }
 })
 
 function moveSection(index: number, delta: number) {

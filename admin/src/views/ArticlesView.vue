@@ -2,10 +2,13 @@
   <div>
     <h1 data-tour="articles-title">Articles</h1>
     <p class="muted">Select an article, edit in Markdown, then save.</p>
+    <p v-if="error" class="muted" style="color: #b91c1c">{{ error }}</p>
     <div class="grid-2">
       <div class="card" data-tour="article-list">
         <input v-model="filter" placeholder="Filter…" style="margin-bottom: 0.75rem" />
-        <div class="article-list">
+        <p v-if="loading" class="muted">Loading articles…</p>
+        <p v-else-if="!filtered.length" class="muted">No articles found.</p>
+        <div v-else class="article-list">
           <button
             v-for="a in filtered"
             :key="a.path"
@@ -41,6 +44,8 @@ const articles = ref<{ path: string; title: string }[]>([])
 const filter = ref('')
 const selected = ref('')
 const saving = ref(false)
+const loading = ref(true)
+const error = ref('')
 const textareaEl = ref<HTMLTextAreaElement | null>(null)
 let editor: EasyMDE | null = null
 
@@ -52,8 +57,20 @@ const filtered = computed(() => {
 })
 
 onMounted(async () => {
-  const data = await api.articles()
-  articles.value = data.articles
+  loading.value = true
+  error.value = ''
+  try {
+    const data = await api.articles()
+    articles.value = data.articles || []
+    if (!articles.value.length) {
+      error.value = 'No markdown files returned from the repository.'
+    }
+  } catch (e: any) {
+    error.value = e.message || 'Failed to load articles'
+    toast(error.value)
+  } finally {
+    loading.value = false
+  }
 })
 
 onBeforeUnmount(() => {
@@ -63,20 +80,24 @@ onBeforeUnmount(() => {
 
 async function open(path: string) {
   selected.value = path
-  const file = await api.getFile(path)
-  await nextTick()
-  if (editor) {
-    editor.toTextArea()
-    editor = null
+  try {
+    const file = await api.getFile(path)
+    await nextTick()
+    if (editor) {
+      editor.toTextArea()
+      editor = null
+    }
+    if (!textareaEl.value) return
+    editor = new EasyMDE({
+      element: textareaEl.value,
+      initialValue: file.content,
+      spellChecker: false,
+      status: false,
+      minHeight: '420px'
+    })
+  } catch (e: any) {
+    toast(e.message || 'Failed to open article')
   }
-  if (!textareaEl.value) return
-  editor = new EasyMDE({
-    element: textareaEl.value,
-    initialValue: file.content,
-    spellChecker: false,
-    status: false,
-    minHeight: '420px'
-  })
 }
 
 async function save() {
